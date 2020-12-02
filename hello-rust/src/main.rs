@@ -17,4 +17,13 @@ fn main() {
     say(message.as_bytes(), width, &mut writer).unwrap();
 
     calculation::calculation();
+
+    let x = &temp();
+    println!("{}", x);
+    // invalid left-hand side expression
+    // temp() = *x;
+}
+
+pub fn temp() -> i32 {
+    return 1;
 }

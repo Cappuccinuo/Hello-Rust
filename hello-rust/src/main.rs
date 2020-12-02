@@ -22,6 +22,15 @@ fn main() {
     println!("{}", x);
     // invalid left-hand side expression
     // temp() = *x;
+
+    let a = 1;
+    // Cannot assign twice to immutable variable a
+    // a = 2;
+    let mut b = 2;
+    println!("b = {}", b); // 2
+    b = 3;
+    println!("a = {}", a); // 1
+    println!("b = {}", b); // 3
 }
 
 pub fn temp() -> i32 {

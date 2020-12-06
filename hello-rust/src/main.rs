@@ -11,6 +11,23 @@ use fizz_buzz::fizz_buzz;
 // https://stackoverflow.com/questions/47565203/cargo-build-hangs-with-blocking-waiting-for-file-lock-on-the-registry-index-a?rq=1
 // to fix Blocking waiting for file lock on package cache
 fn main() {
+    print_hello_fellow_rustaceans();
+    verify_expression();
+    verify_invlaid_value_expression();
+    verify_mutable_and_immutable();
+    verify_ownership();
+    verify_fizz_buzz();
+}
+
+fn temp() -> i32 {
+    return 1;
+}
+
+fn print_new_line() -> () {
+    println!("=================");
+}
+
+fn print_hello_fellow_rustaceans() -> () {
     print_new_line();
     let stdout = stdout();
     let message = String::from("Hello fellow Rustaceans");
@@ -18,15 +35,23 @@ fn main() {
     
     let mut writer = BufWriter::new(stdout.lock());
     say(message.as_bytes(), width, &mut writer).unwrap();
+}
 
+fn verify_expression() -> () {
     calculation::calculation();
+}
 
+fn verify_invlaid_value_expression() -> () {
+    // 2-3
     print_new_line();
     let x = &temp();
     println!("{}", x);
     // invalid left-hand side expression
     // temp() = *x;
+}
 
+fn verify_mutable_and_immutable() -> () {
+    // 2-4
     print_new_line();
     let a = 1;
     // Cannot assign twice to immutable variable a
@@ -36,8 +61,18 @@ fn main() {
     b = 3;
     println!("a = {}", a); // 1
     println!("b = {}", b); // 3
+}
 
-    // Ownership
+fn verify_fizz_buzz() -> () {
+    // 2-8
+    assert_eq!(fizz_buzz(15), "fizzbuzz".to_string());
+    assert_eq!(fizz_buzz(3), "fizz".to_string());
+    assert_eq!(fizz_buzz(5), "buzz".to_string());
+    assert_eq!(fizz_buzz(13), "13".to_string());
+}
+
+fn verify_ownership() -> () {
+    // 2-5
     print_new_line();
     let place1 = "hello";
     let place2 = "hello".to_string();
@@ -46,6 +81,7 @@ fn main() {
     let other = place2;
     println!("{:?}", other); // Should throw err that other value used here after move, but not, get "hello"
 
+    // 2-6
     print_new_line();
     let a = [1, 2, 3];
     let b = &a;
@@ -57,18 +93,4 @@ fn main() {
     println!("{:?}", d); // [1, 2, 3, 4]
     let e = &42;
     assert_eq!(42, *e);
-
-    // fizz_buzz
-    assert_eq!(fizz_buzz(15), "fizzbuzz".to_string());
-    assert_eq!(fizz_buzz(3), "fizz".to_string());
-    assert_eq!(fizz_buzz(5), "buzz".to_string());
-    assert_eq!(fizz_buzz(13), "13".to_string());
-}
-
-pub fn temp() -> i32 {
-    return 1;
-}
-
-pub fn print_new_line() -> () {
-    println!("=================");
 }

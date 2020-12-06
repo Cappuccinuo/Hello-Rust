@@ -2,7 +2,7 @@ use ferris_says::say;
 use std::io::{stdout, BufWriter};
 mod calculation;
 mod functions;
-use functions::fizz_buzz;
+use functions::*;
 // Ref: https://www.rust-lang.org/learn/get-started
 
 // Had to run following during `cargo build`
@@ -18,6 +18,7 @@ fn main() {
     verify_ownership();
     verify_fizz_buzz();
     verify_lexical_scope();
+    verify_function_pointer();
 }
 
 fn temp() -> i32 {
@@ -110,4 +111,12 @@ fn verify_lexical_scope() -> () {
     }
 
     assert_eq!(v, "Hello Rust");
+}
+
+fn verify_function_pointer() -> () {
+    // 2-10
+    let a = 2;
+    let b = 3;
+    assert_eq!(math(sum, a, b), 5);
+    assert_eq!(math(product, a, b), 6);
 }

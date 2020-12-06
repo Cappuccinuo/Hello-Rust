@@ -10,3 +10,15 @@ pub fn fizz_buzz(num: i32) -> String {
         return num.to_string();
     }
 }
+
+pub fn math(op: fn(i32, i32) -> i32, a: i32, b: i32) -> i32 {
+    op(a, b)
+}
+
+pub fn sum(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+pub fn product(a: i32, b: i32) -> i32 {
+    a * b
+}

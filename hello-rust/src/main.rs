@@ -1,6 +1,8 @@
 use ferris_says::say;
 use std::io::{stdout, BufWriter};
 mod calculation;
+mod fizz_buzz;
+use fizz_buzz::fizz_buzz;
 // Ref: https://www.rust-lang.org/learn/get-started
 
 // Had to run following during `cargo build`
@@ -55,6 +57,12 @@ fn main() {
     println!("{:?}", d); // [1, 2, 3, 4]
     let e = &42;
     assert_eq!(42, *e);
+
+    // fizz_buzz
+    assert_eq!(fizz_buzz(15), "fizzbuzz".to_string());
+    assert_eq!(fizz_buzz(3), "fizz".to_string());
+    assert_eq!(fizz_buzz(5), "buzz".to_string());
+    assert_eq!(fizz_buzz(13), "13".to_string());
 }
 
 pub fn temp() -> i32 {

@@ -1,8 +1,8 @@
 use ferris_says::say;
 use std::io::{stdout, BufWriter};
 mod calculation;
-mod fizz_buzz;
-use fizz_buzz::fizz_buzz;
+mod functions;
+use functions::fizz_buzz;
 // Ref: https://www.rust-lang.org/learn/get-started
 
 // Had to run following during `cargo build`
@@ -17,6 +17,7 @@ fn main() {
     verify_mutable_and_immutable();
     verify_ownership();
     verify_fizz_buzz();
+    verify_lexical_scope();
 }
 
 fn temp() -> i32 {
@@ -93,4 +94,20 @@ fn verify_ownership() -> () {
     println!("{:?}", d); // [1, 2, 3, 4]
     let e = &42;
     assert_eq!(42, *e);
+}
+
+fn verify_lexical_scope() -> () {
+    // 2-9
+    let v = "Hello World";
+    assert_eq!(v, "Hello World");
+
+    let v = "Hello Rust";
+    assert_eq!(v, "Hello Rust");
+
+    {
+        let v = "Hello World";
+        assert_eq!(v, "Hello World");
+    }
+
+    assert_eq!(v, "Hello Rust");
 }

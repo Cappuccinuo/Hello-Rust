@@ -119,4 +119,9 @@ fn verify_function_pointer() -> () {
     let b = 3;
     assert_eq!(math(sum, a, b), 5);
     assert_eq!(math(product, a, b), 6);
+
+    // 2-11
+    fn is_true() -> bool { true }
+    fn true_maker() -> fn() -> bool { is_true }
+    assert_eq!(true_maker()(), true);
 }

@@ -19,6 +19,7 @@ fn main() {
     verify_fizz_buzz();
     verify_lexical_scope();
     verify_function_pointer();
+    verify_const_function();
 }
 
 fn temp() -> i32 {
@@ -124,4 +125,14 @@ fn verify_function_pointer() -> () {
     fn is_true() -> bool { true }
     fn true_maker() -> fn() -> bool { is_true }
     assert_eq!(true_maker()(), true);
+}
+
+fn verify_const_function() -> () {
+    const fn init_len() -> usize {
+        return 5;
+    }
+    let arr = [0; init_len()];
+    for num in &arr {
+        println!("{}", num); // an array inited with five zero
+    }
 }

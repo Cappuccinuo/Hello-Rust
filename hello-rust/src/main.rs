@@ -20,6 +20,7 @@ fn main() {
     verify_lexical_scope();
     verify_function_pointer();
     verify_const_function();
+    verify_closure();
 }
 
 fn temp() -> i32 {
@@ -128,6 +129,7 @@ fn verify_function_pointer() -> () {
 }
 
 fn verify_const_function() -> () {
+    // 2-12
     const fn init_len() -> usize {
         return 5;
     }
@@ -135,4 +137,18 @@ fn verify_const_function() -> () {
     for num in &arr {
         println!("{}", num); // an array inited with five zero
     }
+}
+
+fn verify_closure() -> () {
+    // 2-13
+    let out = 42;
+    // fn add(i: i32, j: i32) -> i32 { i + j + out } // can't capture dynamic environment in a fn item
+    fn add(i: i32, j: i32) -> i32 { i + j }
+    let closure_annotated = |i: i32, j: i32| -> i32 { i + j + out };
+    let closure_inferred = |i, j| i + j + out;
+    let i = 1;
+    let j = 2;
+    assert_eq!(3, add(i, j));
+    assert_eq!(45, closure_annotated(i, j));
+    assert_eq!(45, closure_inferred(i, j));
 }
